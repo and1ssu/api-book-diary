@@ -22,8 +22,7 @@ Uma aplicação completa para gerenciar sua coleção de livros, avaliar suas le
 
 1. Clone o repositório:
 ```bash
-git clone <https://github.com/and1ssu/api-book-diary.git>
-
+git clone https://github.com/and1ssu/api-book-diary.git
 ```
 
 2. Instale as dependências do backend:
