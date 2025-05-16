@@ -22,8 +22,8 @@ Uma aplicação completa para gerenciar sua coleção de livros, avaliar suas le
 
 1. Clone o repositório:
 ```bash
-git clone <repository-url>
-cd book-diary
+git clone <https://github.com/and1ssu/api-book-diary.git>
+
 ```
 
 2. Instale as dependências do backend:
@@ -129,12 +129,51 @@ model Book {
   id        Int      @id @default(autoincrement())
   title     String
   author    String
+  genre     String
+  status    String
   rating    Int      @db.SmallInt
   notes     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
 
   @@map("books")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  books     Book[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+```
+
+### Enums
+```prisma
+enum Genre {
+  Ficção
+  NãoFicção
+  Romance
+  Mistério
+  Fantasia
+  Ciência
+  História
+  Biografia
+  Autoajuda
+  Outro
+}
+
+enum Status {
+  NãoLido
+  Lendo
+  Lido
+  Abandonado
 }
 ```
 
@@ -151,19 +190,7 @@ const bookSchema = Joi.object({
 });
 ```
 
-## 🧪 Testes
 
-Para garantir a qualidade do código e a confiabilidade da aplicação, recomendamos implementar:
-
-1. **Testes Unitários**: Testar funções e componentes isoladamente
-2. **Testes de Integração**: Verificar a integração entre diferentes partes da aplicação
-3. **Testes de API**: Validar os endpoints e suas respostas
-4. **Testes de Banco de Dados**: Garantir a integridade das operações no banco
-
-Para implementar os testes, você pode usar frameworks como:
-- Jest para testes unitários
-- Supertest para testes de API
-- Prisma Client para testes de banco de dados
 
 ## 🖥️ Interface de Administração
 
